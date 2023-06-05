@@ -1,0 +1,21 @@
+seed: 1
+ass: 1
+tdir: timeflow
+col:
+  sentiment: sentiment
+  date: date
+figsize: !!python/tuple [12, 9]
+projection:
+  - - content
+    - time
+    - forwards
+    - comments
+    - likes
+  - 2
+
+vis:
+  width: 1200
+  height: 600
+  alpha: 0.5
+  #  24 * 60 * 60 * 1000
+  width1: 86400000
