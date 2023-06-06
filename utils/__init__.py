@@ -10,9 +10,29 @@ from .preprocess import (
     transContent,
     addSentiment,
     addDate,
+    clean_df,
+    remove_stopwords,
+    getStopWords,
+    format_content,
 )
 
 from .visualization import (
     sentimentTrend,
     sentimentTrendDaily,
+    pca_plot,
+    kmeans_plot,
+    mcdNote,
+    periodValue,
+    getWordCloud,
+)
+
+from .eda import (
+    tfidf,
+    k_means,
+    feature_terms,
+    get_top_terms,
+    pipeline,
+    lda_pipe,
+    lda_generator,
+    topic_model,
 )

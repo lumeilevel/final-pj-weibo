@@ -5,13 +5,23 @@ col:
   sentiment: sentiment
   date: date
 figsize: !!python/tuple [12, 9]
+ncls: 10
+cls: 5
+comp:
+  - 6
+  - 5
+topw:
+  - 12
+  - 10
 projection:
   - - content
     - time
     - forwards
     - comments
     - likes
-  - 2
+  - - content
+  - - content
+    - time
 
 vis:
   width: 1200
@@ -19,3 +29,6 @@ vis:
   alpha: 0.5
   #  24 * 60 * 60 * 1000
   width1: 86400000
+
+max_words: 5000
+max_font_size: 48

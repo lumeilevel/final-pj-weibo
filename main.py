@@ -7,18 +7,18 @@
 import argparse
 import os
 
+import jieba
 import numpy as np
 import pandas as pd
+import pyLDAvis.gensim_models
 import yaml
 
 import utils
 
 
 def sentimentAnalysis(config, dfs, csvs):
-    dfs = utils.projection(dfs, config['projection'][args.ass-1])
+    dfs = utils.projection(dfs, config['projection'][args.ass - 1])
     utils.transContent(dfs)
-    print(type(dfs[0]))
-    print(dfs[0].columns.values)
     mean = utils.addSentiment(dfs, config['col']['sentiment'])
     for m in mean:
         print(f"Mean sentiment of {csvs[mean.index(m)][:-4]} is {m}")
@@ -36,11 +36,33 @@ def sentimentAnalysis(config, dfs, csvs):
 
 
 def topicModeling(config, dfs, csvs):
-    pass
+    dfs = utils.projection(dfs, config['projection'][args.ass - 1])
+    utils.clean_df(dfs[2])
+    utils.pipeline(dfs[2].content, config['ncls'])
+    utils.pca_plot(dfs[2].content, utils.tfidf)
+    utils.lda_pipe(dfs[2].content, config['comp'][0], config['topw'][0])
+    utils.lda_generator(dfs[2].content, config['comp'][1], config['topw'][1])
+    utils.kmeans_plot(dfs[2].content)
+    contents = [dfs[i].content for i in range(len(csvs))]
+    stopwords = utils.getStopWords('cn.txt')
+    for content in contents:
+        for idx in range(len(content)):
+            content[idx] = utils.remove_stopwords(content[idx], stopwords)
+    # result = [jieba.tokenize(content) for content in contents]
+    lst = [[[res[0] for res in list(jieba.tokenize(content[i]))] for i in range(len(content))] for content in contents]
+    for ls in lst:
+        utils.mcdNote(*utils.topic_model(ls, config['cls']))
 
 
 def wordCloud(config, dfs, csvs):
-    pass
+    dfs = utils.projection(dfs, config['projection'][args.ass - 1])
+    len_df = {period[:-4]: len(df) for period, df in zip(csvs, dfs)}
+    stopwords = utils.getStopWords('cn.txt')
+    period, values = list(len_df.keys()), list(len_df.values())
+    utils.periodValue(period, values)
+    for df in dfs:
+        post = utils.format_content(df.content.to_string(index=False))
+        utils.getWordCloud(post, stopwords, max_words=config['max_words'], max_font_size=config['max_font_size'])
 
 
 def main(config):

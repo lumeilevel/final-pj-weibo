@@ -4,17 +4,18 @@
 # @Time     : 2023/6/5 21:01
 # @File     : preprocess.py
 # @Project  : final-pj-weibo
+import os
 import re
 import string
 
 import jieba
 import pandas as pd
-from stopwords import *
 from snownlp import SnowNLP
 
 
 def projection(dfs, cols):
-    return [df.loc[:, cols] for df in dfs]
+    # return [df.loc[:, cols] for df in dfs]
+    return [df[cols] for df in dfs]
 
 
 def transContent(dfs):
@@ -42,7 +43,7 @@ def cut_text(text) :
     return ",".join(jieba.cut_for_search(text, HMM=True))
 
 
-def remove_stopwords(text):
+def remove_stopwords(text, stopwords):
     return "".join([x for x in text if x not in stopwords])
 
 
@@ -64,3 +65,17 @@ def process_text(text):
 
 def clean_df(df, threshold=2):
     return df.drop(df[df['content'].map(len) < threshold].index)
+
+
+def getStopWords(filename, data_dir='data/stopwords/'):
+    with open(os.path.join(data_dir, filename)) as f:
+        stopword = f.readlines()
+        stopwords = [line.strip('\n\r') for line in stopword]
+    return stopwords
+
+
+def format_content(content):
+    content = content.replace(u'\xa0', u' ')
+    content = re.sub(r'\[.*?\]','',content)
+    content = content.replace('\n', ' ')
+    return content
