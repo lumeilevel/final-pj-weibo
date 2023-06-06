@@ -39,7 +39,7 @@ def addDate(dfs, col_name='date'):
     # return [df[col_name].unique() for df in dfs]
 
 
-def cut_text(text) :
+def cut_text(text):
     return ",".join(jieba.cut_for_search(text, HMM=True))
 
 
@@ -56,8 +56,8 @@ def remove_unicode(text):
     return re.sub(r"[\s+\.\!\/_,$%^*(+\"\']+|[+——！\ ，。？、~@#￥%……&*（）：；《）《》“”(<>)»〔〕-]+", "", text)
 
 
-def process_text(text):
-    stopwords_removed = remove_stopwords(text)
+def process_text(text, stopwords):
+    stopwords_removed = remove_stopwords(text, stopwords)
     removed_ascii = remove_ascii(stopwords_removed)
     tokenized = cut_text(removed_ascii)
     return remove_unicode(tokenized)
@@ -76,6 +76,6 @@ def getStopWords(filename, data_dir='data/stopwords/'):
 
 def format_content(content):
     content = content.replace(u'\xa0', u' ')
-    content = re.sub(r'\[.*?\]','',content)
+    content = re.sub(r'\[.*?\]', '', content)
     content = content.replace('\n', ' ')
     return content

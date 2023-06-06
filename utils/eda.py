@@ -31,7 +31,7 @@ def k_means(data, num_clusters):
 def feature_terms(data):
     tfidf_vectorizer = TfidfVectorizer(max_df=.99, min_df=.0001, ngram_range=(1, 3))
     # tfidf_vectorizer = TfidfVectorizer(max_df=.8, min_df=.01, ngram_range=(1,2))
-    vectors = tfidf_vectorizer.fit(data)
+    tfidf_vectorizer.fit(data)
     return tfidf_vectorizer.get_feature_names()
 
 

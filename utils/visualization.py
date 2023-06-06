@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import pyLDAvis
 from bokeh import palettes
-from bokeh.io import show, output_notebook, export_png, save
+from bokeh.io import show, output_notebook, save
 from bokeh.plotting import figure
 from matplotlib import pyplot as plt
 from pyLDAvis import gensim_models
