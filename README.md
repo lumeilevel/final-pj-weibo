@@ -7,8 +7,6 @@ Final sub project for Weiboscope.
 
 ![periodValue](log/visualization/periodValue_2023-06-06-14-36-00.png)
 
-<iframe src="log/visualization/sentiment_trend_daily_2023-06-06-11-41-07.html" width="100%"></iframe>
-
 ![htm](log/visualization/sentiment_trend_daily.png)
 
 ## Topic
@@ -17,11 +15,15 @@ Final sub project for Weiboscope.
 
 ![pca](log/visualization/pca_2023-06-06-12-51-27.png)
 
-<iframe src="log/visualization/mcd_2023-06-06-12-54-40.html" width="100%"></iframe>
+### Html demonstration
 
-<iframe src="log/visualization/mcd_2023-06-06-12-56-13.html" width="100%"></iframe>
+Give 3 pictures to show the topic distribution. The original html is in `log/visualization`, and is interactive.
 
-<iframe src="log/visualization/mcd_2023-06-06-12-57-48.html" width="100%"></iframe>
+![html1](log/visualization/html1.png)
+
+![html2](log/visualization/html2.png)
+
+![html3](log/visualization/html3.png)
 
 ## Word Cloud
 
@@ -30,3 +32,4 @@ Final sub project for Weiboscope.
 ![2](log/visualization/wordcloud_2023-06-06-14-36-07.jpg)
 
 ![3](log/visualization/wordcloud_2023-06-06-14-36-11.jpg)
+
